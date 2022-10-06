@@ -7,6 +7,7 @@ import { DataSource } from "../../data-source/DataSource"
 import { DriverOptionNotSetError } from "../../error/DriverOptionNotSetError"
 import { DriverPackageNotInstalledError } from "../../error/DriverPackageNotInstalledError"
 import { ReplicationMode } from "../types/ReplicationMode"
+import { ColumnType } from "../types/ColumnTypes";
 
 export class ReactNativeDriver extends AbstractSqliteDriver {
     options: ReactNativeConnectionOptions
@@ -43,6 +44,19 @@ export class ReactNativeDriver extends AbstractSqliteDriver {
             this.queryRunner = undefined
             this.databaseConnection.close(ok, fail)
         })
+    }
+
+    normalizeType(column: {
+        type?: ColumnType
+        length?: number | string
+        precision?: number | null
+        scale?: number
+    }): string {
+        if ((column.type as any) === Buffer) {
+            return "blob"
+        }
+
+        return super.normalizeType(column)
     }
 
     /**

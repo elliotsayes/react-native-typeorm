@@ -52,7 +52,7 @@ export class ReactNativeDriver extends AbstractSqliteDriver {
         precision?: number | null
         scale?: number
     }): string {
-        if ((column.type as any) === Buffer) {
+        if (column.type?.toString().startsWith("function Buffer(")) {
             return "blob"
         }
 

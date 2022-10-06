@@ -1,4 +1,5 @@
 import { AbstractSqliteDriver } from "../sqlite-abstract/AbstractSqliteDriver"
+console.log(AbstractSqliteDriver);
 import { ReactNativeConnectionOptions } from "./ReactNativeConnectionOptions"
 import { ReactNativeQueryRunner } from "./ReactNativeQueryRunner"
 import { QueryRunner } from "../../query-runner/QueryRunner"
